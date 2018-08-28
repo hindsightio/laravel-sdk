@@ -1,6 +1,7 @@
 <?php namespace Hindsight\Remote;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 
 /**
  * Transmits data to Hindsight.
@@ -34,15 +35,28 @@ class HindsightTransmitter
      * formatted by HindsightEventFormatter before sending.
      *
      * @param array $events
+     * @throws GuzzleException
      */
     public function sendForIngest(array $events)
     {
-        $this->http->request('POST', '/', [
-            'json' => [
-                'messages' => $events,
-            ],
-            'headers' => ['Authorization' => "Bearer {$this->apiToken}"]
-        ]);
+        try {
+            $this->http->request('POST', '/', [
+                'json' => [
+                    'messages' => $events,
+                ],
+                'headers' => ['Authorization' => "Bearer {$this->apiToken}"]
+            ]);
+        } catch (GuzzleException $e) {
+            // silence guzzle exceptions
+        }
+    }
+
+    /**
+     * Check to see if we can connect to ingest.
+     */
+    public function diagnoseIngestConnection()
+    {
+
     }
 
 
