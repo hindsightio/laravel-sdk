@@ -3,7 +3,7 @@
 use Hindsight\Configuration\ConfigHelper as Hindsight;
 
 /**
- * TIP: the `php artisan hindsight:verify` command well diagnose your config file for you!
+ * TIP: the `php artisan hindsight:verify` command will diagnose your config file for you!
  */
 return [
     'enable'         => true,
@@ -20,7 +20,7 @@ return [
     'preset'         => env('APP_DEBUG', false) ? 'debug' : 'production',
 
     /**
-     * Customize Hindsight settings here.
+     * Customize Hindsight settings here. `null` means "fall back to preset".
      */
     'features' => [
 
@@ -47,17 +47,31 @@ return [
                     'Authorization'
                 ],
             ],
+            'extras' => [
+                'query_counter' => true,
+            ],
         ],
 
         /**
          * Log native Laravel events. Respects the filters above; native laravel events are DEBUG level.
          */
         'laravel_logging' => [
-
+            'events' => [
+                \Illuminate\Database\Events\ConnectionEvent::class => null,
+                \Illuminate\Database\Events\QueryExecuted::class => null,
+            ],
         ],
 
         /**
-         * Log events on Eloquent models.
+         * Log events on Eloquent models. Respects the filters above; events are at DEBUG level. Events are formatted
+         * to respect `LoggableEntity` and `Eloquent::toJson()`, in that priority. Eloquent models often contain private
+         * information such as credit card information or keys, so make sure they are properly hidden!
+         *
+         * TIP: the `php artisan hindsight:verify` command will report on your logged models, and what fields are
+         * hidden.
          */
+        'eloquent_logging' => [
+            'models' => [],
+        ],
     ],
 ];
