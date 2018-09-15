@@ -4,13 +4,10 @@ use Hindsight\Hindsight;
 
 class Configurator
 {
-    public function parse(array $config): Hindsight
+    public function parse(array $config): array
     {
-        $nexus = new Hindsight();
+        $parsed = [];
 
-        // assign presets
-        if (array_get($config, 'preset')) {
-
-        }
+        return $parsed;
     }
 }

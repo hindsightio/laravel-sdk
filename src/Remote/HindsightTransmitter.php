@@ -35,10 +35,12 @@ class HindsightTransmitter
      * formatted by HindsightEventFormatter before sending.
      *
      * @param array $events
-     * @throws GuzzleException
      */
     public function sendForIngest(array $events)
     {
+        // quit early if no API token
+        if (!$this->apiToken) return;
+
         try {
             $this->http->request('POST', '/', [
                 'json' => [

@@ -1,7 +1,15 @@
 <?php namespace Hindsight\Formatting;
 
+use Hindsight\Formatting\Formatters\ContextNormalizingFormatter;
+use Hindsight\Formatting\Formatters\HindsightFormatter;
+
 class HindsightEventFormatter
 {
+    /**
+     * @var HindsightFormatter[];
+     */
+    protected $formatters = [];
+
     /**
      * Format an event from whatever rich data it may have into a format
      * Hindsight can process.
@@ -11,21 +19,22 @@ class HindsightEventFormatter
      */
     public function format(array $event)
     {
-        $record['context'] = array_merge(
-            $this->formatExtras($record['extra'] ?? []),
-            $record['context'] ?? []
-        );
-        unset($record['extra']);
-
-        if (! empty($record['context']['exception'])) {
-            $record['context']['exception'] = $this->normalizeException($record['context']['exception']);
+        // loop through registered formatters
+        foreach($this->formatters as $formatter) {
+            $event = $formatter->format($event);
         }
 
-        $record['timestamp'] = (int) $record['datetime']->format('Uv');
-        unset($record['datetime']);
+        // finally, ensure everything is normalized
+        $event = (new ContextNormalizingFormatter())->format($event);
 
-        $record['level'] = $this->logLevels[$record['level']];
+        return $event;
+    }
 
-        return $record;
+    /**
+     * @param HindsightFormatter $formatter
+     */
+    public function pushFormatter(HindsightFormatter $formatter)
+    {
+        $this->formatters[] = $formatter;
     }
 }
