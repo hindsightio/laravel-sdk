@@ -1,5 +1,6 @@
 <?php namespace Hindsight;
 
+use Hindsight\Configuration\Configurator;
 use Hindsight\Formatting\Formatters\DatetimeToMillisecondsFormatter;
 use Hindsight\Formatting\Formatters\ExtrasToContextFormatter;
 use Hindsight\Formatting\Formatters\MonologToRFC5424SeverityFormatter;
@@ -14,6 +15,9 @@ class HindsightServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('hindsight', Hindsight::class);
+        $this->app->bind(HindsightTransmitter::class, function ($app) {
+            return new HindsightTransmitter($app['config']->get('hindsight.api_url'));
+        });
         $this->app->singleton('hindsight.transmitter', HindsightTransmitter::class);
         $this->app->singleton('hindsight.formatter', HindsightEventFormatter::class);
     }
@@ -23,6 +27,11 @@ class HindsightServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/hindsight.php' => config_path('hindsight.php'),
         ], 'hindsight');
+
+        // Merge the config with the specified preset
+        $this->app->make(Configurator::class)->setup();
+
+        $this->app['hindsight.transmitter']->setApiToken($this->app['config']->get('hindsight.api_key'));
 
         /** @var LogManager $log */
         $log = $this->app['log'];
@@ -46,8 +55,17 @@ class HindsightServiceProvider extends ServiceProvider
             $log->extend('hindsight', function ($app, array $config) use ($hs) {
                 return $hs->setup(new Logger(config('app.environment')));
             });
+            /** @var \Illuminate\Log\Logger $driver */
+            $driver = $log->driver();
+            if ($driver->getLogger() instanceof Logger && collect($driver->getLogger()->getHandlers())->first(function ($handler) {
+                return $handler instanceof HindsightMonologHandler;
+            }) !== null) {
+                $hs->setup($driver->getLogger());
+            }
         } else {
             $hs->setup($log->getMonolog());
         }
+
+
     }
 }

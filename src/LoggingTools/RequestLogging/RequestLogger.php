@@ -1,16 +1,28 @@
 <?php namespace Hindsight\LoggingTools\RequestLogging;
 
 use Illuminate\Contracts\Http\Kernel as KernelContract;
-use Illuminate\Foundation\Http\Kernel;
 
 class RequestLogger
 {
     /**
-     * @param Kernel|KernelContract $kernel
-     * @param array                 $config
+     * @var KernelContract
      */
-    public function init(KernelContract $kernel, array $config)
+    protected $kernel;
+
+    /**
+     * RequestLogger constructor.
+     * @param KernelContract $kernel
+     */
+    public function __construct(KernelContract $kernel)
     {
-        $kernel->prependMiddleware(new HindsightRequestLoggingMiddleware());
+        $this->kernel = $kernel;
+    }
+
+    /**
+     * @param array $config
+     */
+    public function __invoke(array $config)
+    {
+        $this->kernel->prependMiddleware(new HindsightRequestLoggingMiddleware());
     }
 }
