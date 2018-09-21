@@ -11,7 +11,7 @@ class MessageFilterer
 {
     public function __invoke(Logger $logger, array $config)
     {
-        $hindsight = MonologReader::retrieveHindsightHandler($logger);
+        $hindsight = MonologReader::retrieveHindsightHandler($logger, true);
         if (! $hindsight) {
             return;
         }

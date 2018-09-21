@@ -31,8 +31,6 @@ class HindsightServiceProvider extends ServiceProvider
         // Merge the config with the specified preset
         $this->app->make(Configurator::class)->setup();
 
-        $this->app['hindsight.transmitter']->setApiToken($this->app['config']->get('hindsight.api_key'));
-
         /** @var LogManager $log */
         $log = $this->app['log'];
         /** @var Hindsight $hs */
@@ -65,7 +63,5 @@ class HindsightServiceProvider extends ServiceProvider
         } else {
             $hs->setup($log->getMonolog());
         }
-
-
     }
 }

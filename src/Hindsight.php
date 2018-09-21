@@ -53,7 +53,7 @@ class Hindsight
 
     public function setup(Logger $logger)
     {
-        $this->toolbox->pack($this->config->get('hindsight.features'));
+        $this->toolbox->pack($logger, $this->config->get('hindsight.features'));
 
         return $logger->pushHandler(
             new WhatFailureGroupHandler([
