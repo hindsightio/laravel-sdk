@@ -1,6 +1,7 @@
 <?php namespace Hindsight\LoggingTools\RequestLogging;
 
 use Illuminate\Contracts\Http\Kernel as KernelContract;
+use Monolog\Logger;
 
 class RequestLogger
 {
@@ -19,9 +20,10 @@ class RequestLogger
     }
 
     /**
-     * @param array $config
+     * @param Logger $logger
+     * @param array  $config
      */
-    public function __invoke(array $config)
+    public function __invoke(Logger $logger, array $config)
     {
         $this->kernel->prependMiddleware(new HindsightRequestLoggingMiddleware());
     }
