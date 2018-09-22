@@ -14,10 +14,10 @@ return [
      * Presets are ready-to-go, ready-to-run settings. All other settings in this file will override the preset; set
      * any other setting to `null` to indicate you'd like to fall back to your preset.
      *
-     * In short: don't know what to do? Pick `debug` for apps in development and `production` for apps seeing lots
-     * of activity!
+     * In short: don't know what to do? Pick `everything` for apps in development or of low volume,
+     * and `errors` to only log when errors happen, useful for apps seeing lots of activity!
      */
-    'preset'         => env('APP_DEBUG', false) ? 'debug' : 'production',
+    'preset'         => env('APP_DEBUG', false) ? 'everything' : 'errors',
 
     /**
      * Customize Hindsight settings here. `null` means "fall back to preset".
