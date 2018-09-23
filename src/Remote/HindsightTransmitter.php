@@ -20,6 +20,8 @@ class HindsightTransmitter
      */
     protected $apiToken;
 
+    protected $ingestionUrl = 'https://logs.inhindsight.io';
+
     public function __construct()
     {
         $this->http = new Client();
@@ -28,6 +30,14 @@ class HindsightTransmitter
     public function setApiToken(string $apiToken)
     {
         $this->apiToken = $apiToken;
+    }
+
+    /**
+     * @param string $ingestionUrl
+     */
+    public function setIngestionUrl(string $ingestionUrl): void
+    {
+        $this->ingestionUrl = $ingestionUrl;
     }
 
     /**
@@ -42,7 +52,7 @@ class HindsightTransmitter
         if (!$this->apiToken) return;
 
         try {
-            $this->http->request('POST', '/', [
+            $this->http->request('POST', $this->ingestionUrl, [
                 'json' => [
                     'messages' => $events,
                 ],
