@@ -1,5 +1,6 @@
 <?php namespace Hindsight;
 
+use Hindsight\Commands\VerifyConfigurationCommand;
 use Hindsight\Configuration\Configurator;
 use Hindsight\Formatting\Formatters\DatetimeToMillisecondsFormatter;
 use Hindsight\Formatting\Formatters\ExtrasToContextFormatter;
@@ -26,6 +27,11 @@ class HindsightServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                VerifyConfigurationCommand::class,
+            ]);
+        }
         $this->publishes([
             __DIR__.'/../config/hindsight.php' => config_path('hindsight.php'),
         ], 'hindsight');
