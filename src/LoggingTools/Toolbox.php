@@ -4,6 +4,7 @@ namespace Hindsight\LoggingTools;
 
 use Hindsight\LoggingTools\EloquentLogging\EloquentLogger;
 use Hindsight\LoggingTools\Filtering\MessageFilterer;
+use Hindsight\LoggingTools\LaravelLogging\LaravelEventLogger;
 use Hindsight\LoggingTools\RequestLogging\RequestLogger;
 use Monolog\Logger;
 

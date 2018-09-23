@@ -66,7 +66,7 @@ class HindsightServiceProvider extends ServiceProvider
             $driver = $log->driver();
             if ($driver->getLogger() instanceof Logger && collect($driver->getLogger()->getHandlers())->first(function ($handler) {
                 return $handler instanceof HindsightMonologHandler;
-            }) !== null) {
+            }) === null) {
                 $hs->setup($driver->getLogger());
             }
         } else {
