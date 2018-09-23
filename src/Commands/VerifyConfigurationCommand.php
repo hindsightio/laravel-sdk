@@ -27,6 +27,7 @@ class VerifyConfigurationCommand extends Command
      */
     public function __construct(LoggerInterface $logger, Repository $config)
     {
+        parent::__construct();
         $this->logger = $logger;
         $this->config = $config;
     }
