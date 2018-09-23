@@ -20,7 +20,7 @@ class HindsightTransmitter
      */
     protected $apiToken;
 
-    public function __construct(\string $apiRootUrl)
+    public function __construct(string $apiRootUrl)
     {
         $this->http = new Client();
     }
