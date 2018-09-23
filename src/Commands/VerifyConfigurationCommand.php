@@ -4,6 +4,7 @@ namespace Hindsight\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Config\Repository;
+use Illuminate\Support\Arr;
 use Psr\Log\LoggerInterface;
 
 class VerifyConfigurationCommand extends Command
@@ -37,7 +38,7 @@ class VerifyConfigurationCommand extends Command
         $this->info('Sending log message to Hindsight...');
         $this->logger->info('Hindsight setup working', [
             'code' => 'hindsight-verification.success',
-            'configuration' => $this->config->get('hindsight'),
+            'features' => config('hindsight.features'),
         ]);
         $this->info('✔ Log message transmitted to Hindsight');
     }

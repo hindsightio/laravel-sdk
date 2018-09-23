@@ -18,11 +18,10 @@ class HindsightServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/hindsight.php', 'hindsight');
 
         $this->app->singleton('hindsight', Hindsight::class);
-        $this->app->bind(HindsightTransmitter::class, function ($app) {
-            return new HindsightTransmitter($app['config']->get('hindsight.api_url'));
-        });
-        $this->app->singleton('hindsight.transmitter', HindsightTransmitter::class);
-        $this->app->singleton('hindsight.formatter', HindsightEventFormatter::class);
+        $this->app->singleton(HindsightTransmitter::class);
+        $this->app->alias(HindsightTransmitter::class, 'hindsight.transmitter');
+        $this->app->singleton(HindsightEventFormatter::class);
+        $this->app->alias(HindsightEventFormatter::class, 'hindsight.formatter');
     }
 
     public function boot()
