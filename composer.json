@@ -1,5 +1,5 @@
 {
-    "name": "hindsight/laravel-sdk",
+    "name": "hindsight/laravel",
     "description": "Comprehensive, pre-baked logging for Laravel packages with Hindsight",
     "type": "library",
     "license": "MIT",
