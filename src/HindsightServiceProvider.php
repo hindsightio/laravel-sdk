@@ -14,6 +14,8 @@ class HindsightServiceProvider extends ServiceProvider
 {
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__.'/../config/hindsight.php', 'hindsight');
+
         $this->app->singleton('hindsight', Hindsight::class);
         $this->app->bind(HindsightTransmitter::class, function ($app) {
             return new HindsightTransmitter($app['config']->get('hindsight.api_url'));
@@ -27,6 +29,7 @@ class HindsightServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/hindsight.php' => config_path('hindsight.php'),
         ], 'hindsight');
+
 
         // Merge the config with the specified preset
         $this->app->make(Configurator::class)->setup();
