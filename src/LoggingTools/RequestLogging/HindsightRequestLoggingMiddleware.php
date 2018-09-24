@@ -73,14 +73,6 @@ class HindsightRequestLoggingMiddleware
      */
     protected function addPreflightStickies($request, $requestId): string
     {
-        StickyContext::stack('hindsight')->add('actor_id',
-            function () {
-                return \Auth::id();
-            });
-        StickyContext::stack('hindsight')->add('environment',
-            function () {
-                return \App::environment();
-            });
         StickyContext::stack('hindsight')->add('request',
             [
                 'id'      => $requestId,

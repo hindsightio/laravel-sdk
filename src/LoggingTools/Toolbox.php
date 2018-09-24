@@ -19,6 +19,8 @@ class Toolbox
             'eloquent_logging' => EloquentLogger::class,
         ];
 
+        app(AttachEnvironmentDetails::class)();
+
         foreach ($features as $feature => $configuration) {
             if (! isset($availableFeatures[$feature])) {
                 continue;
