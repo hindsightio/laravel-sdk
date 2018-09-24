@@ -27,7 +27,7 @@ class HindsightRequestLoggingMiddleware
 
         $log->debug('Request initiated', array_merge([
             'request' => array_filter([
-                'body' => $request->except(config('hindsight.blacklist.fields', [])),
+                'body' => $request->except(config('hindsight.redact.fields', [])),
             ])
         ], ['code' => 'hindsight.request-started']));
 
@@ -62,7 +62,7 @@ class HindsightRequestLoggingMiddleware
     protected function filterHeaders($headers)
     {
         return array_filter($headers, function ($header) {
-            return ! in_array(strtolower($header), array_map('strtolower', config('hindsight.blacklist.headers')));
+            return ! in_array(strtolower($header), array_map('strtolower', config('hindsight.redact.headers', [])));
         }, ARRAY_FILTER_USE_KEY);
     }
 
