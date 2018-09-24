@@ -35,9 +35,12 @@ class HindsightServiceProvider extends ServiceProvider
             __DIR__.'/../config/hindsight.php' => config_path('hindsight.php'),
         ], 'hindsight');
 
-
         // Merge the config with the specified preset
         $this->app->make(Configurator::class)->setup();
+
+        if (! $this->app['config']->get('hindsight.api_key')) {
+            return;
+        }
 
         /** @var LogManager $log */
         $log = $this->app['log'];

@@ -4,7 +4,6 @@ namespace Hindsight\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Config\Repository;
-use Illuminate\Support\Arr;
 use Psr\Log\LoggerInterface;
 
 class VerifyConfigurationCommand extends Command
@@ -35,6 +34,13 @@ class VerifyConfigurationCommand extends Command
 
     public function handle()
     {
+        if (! $this->config->get('hindsight.api_key')) {
+            $this->warn('✘ No API Key set');
+            $this->info('Please add HINDSIGHT_API_KEY to your .env file');
+
+            return 1;
+        }
+
         $this->info('Sending log message to Hindsight...');
         $this->logger->info('Hindsight setup working', [
             'code' => 'hindsight-verification.success',
