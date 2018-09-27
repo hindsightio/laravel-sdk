@@ -1,4 +1,6 @@
-<?php namespace Hindsight\Remote;
+<?php
+
+namespace Hindsight\Remote;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;

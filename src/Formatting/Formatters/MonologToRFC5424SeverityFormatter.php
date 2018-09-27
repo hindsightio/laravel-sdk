@@ -1,4 +1,6 @@
-<?php namespace Hindsight\Formatting\Formatters;
+<?php
+
+namespace Hindsight\Formatting\Formatters;
 
 use Monolog\Logger;
 

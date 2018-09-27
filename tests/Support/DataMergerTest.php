@@ -1,4 +1,6 @@
-<?php namespace Hindsight\Tests\Support;
+<?php
+
+namespace Hindsight\Tests\Support;
 
 use Hindsight\Support\DataMerger;
 use Hindsight\Tests\BaseTest;

@@ -1,4 +1,6 @@
-<?php namespace Hindsight;
+<?php
+
+namespace Hindsight;
 
 interface LoggableEntity
 {
