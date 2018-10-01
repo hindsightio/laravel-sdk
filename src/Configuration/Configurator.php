@@ -1,4 +1,6 @@
-<?php namespace Hindsight\Configuration;
+<?php
+
+namespace Hindsight\Configuration;
 
 use Hindsight\Hindsight;
 use Hindsight\Support\DataMerger;

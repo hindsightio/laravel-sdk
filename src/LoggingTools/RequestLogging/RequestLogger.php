@@ -1,4 +1,6 @@
-<?php namespace Hindsight\LoggingTools\RequestLogging;
+<?php
+
+namespace Hindsight\LoggingTools\RequestLogging;
 
 use Illuminate\Contracts\Http\Kernel as KernelContract;
 use Monolog\Logger;

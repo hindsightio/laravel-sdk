@@ -1,4 +1,6 @@
-<?php namespace Hindsight\Tests;
+<?php
+
+namespace Hindsight\Tests;
 
 use PHPUnit\Framework\TestCase;
 

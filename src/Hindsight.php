@@ -1,4 +1,6 @@
-<?php namespace Hindsight;
+<?php
+
+namespace Hindsight;
 
 use Decahedron\StickyLogging\StickyContextProcessor;
 use Hindsight\Formatting\HindsightEventFormatter;

@@ -1,4 +1,6 @@
-<?php namespace Hindsight\Formatting;
+<?php
+
+namespace Hindsight\Formatting;
 
 use Hindsight\Formatting\Formatters\ContextNormalizingFormatter;
 use Hindsight\Formatting\Formatters\HindsightFormatter;
