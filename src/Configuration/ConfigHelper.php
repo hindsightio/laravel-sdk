@@ -1,4 +1,6 @@
-<?php namespace Hindsight\Configuration;
+<?php
+
+namespace Hindsight\Configuration;
 
 class ConfigHelper
 {

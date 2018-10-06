@@ -1,4 +1,6 @@
-<?php namespace Hindsight\Tests\Formatting\Formatters;
+<?php
+
+namespace Hindsight\Tests\Formatting\Formatters;
 
 use Hindsight\Formatting\Formatters\ExtrasToContextFormatter;
 use Hindsight\Tests\BaseTest;

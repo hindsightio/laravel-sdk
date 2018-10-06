@@ -1,4 +1,6 @@
-<?php namespace Hindsight;
+<?php
+
+namespace Hindsight;
 
 use Hindsight\Commands\VerifyConfigurationCommand;
 use Hindsight\Configuration\Configurator;

@@ -1,4 +1,6 @@
-<?php namespace Hindsight;
+<?php
+
+namespace Hindsight;
 
 use Hindsight\Formatting\HindsightEventFormatter;
 use Hindsight\Remote\HindsightTransmitter;

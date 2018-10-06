@@ -1,4 +1,6 @@
-<?php namespace Hindsight\Formatting\Formatters;
+<?php
+
+namespace Hindsight\Formatting\Formatters;
 
 class ExtrasToContextFormatter extends HindsightFormatter
 {

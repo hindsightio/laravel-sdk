@@ -1,4 +1,6 @@
-<?php namespace Hindsight\Tests\Formatting\Formatters;
+<?php
+
+namespace Hindsight\Tests\Formatting\Formatters;
 
 use Hindsight\Formatting\Formatters\MonologToRFC5424SeverityFormatter;
 use Hindsight\Tests\BaseTest;

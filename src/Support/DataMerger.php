@@ -1,4 +1,6 @@
-<?php namespace Hindsight\Support;
+<?php
+
+namespace Hindsight\Support;
 
 class DataMerger
 {

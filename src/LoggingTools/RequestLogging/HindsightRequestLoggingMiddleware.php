@@ -1,4 +1,6 @@
-<?php namespace Hindsight\LoggingTools\RequestLogging;
+<?php
+
+namespace Hindsight\LoggingTools\RequestLogging;
 
 use Decahedron\StickyLogging\StickyContext;
 use Illuminate\Log\Logger;
