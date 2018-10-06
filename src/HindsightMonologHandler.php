@@ -27,7 +27,7 @@ class HindsightMonologHandler extends AbstractHandler
 
     public function handle(array $record)
     {
-        $this->submitRecordsToHindsight($record);
+        $this->submitRecordsToHindsight([$record]);
     }
 
     public function handleBatch(array $records)
