@@ -27,6 +27,10 @@ class RequestLogger
      */
     public function __invoke(Logger $logger, array $config)
     {
+        if (! value($config['enable'])) {
+            return;
+        }
+
         $this->kernel->prependMiddleware(new HindsightRequestLoggingMiddleware());
     }
 }
