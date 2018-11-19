@@ -53,7 +53,9 @@ return [
         ],
 
         /**
-         * Log native Laravel events. Respects the filters above; native laravel events are DEBUG level.
+         * Log events. Respects the filters above; native laravel events are DEBUG level.
+         *
+         * You may specify `*` to record all events.
          */
         'laravel_logging' => [
             'events' => [
@@ -71,7 +73,24 @@ return [
          * hidden.
          */
         'eloquent_logging' => [
-            'models' => [],
+            'models' => ['*'],
+        ],
+
+        /**
+         * Log all queued jobs that are run in your application. You may specify an array
+         * of job classes to log, or leave it as `*` to log all jobs that are executed.
+         */
+        'queue_logging' => [
+            'jobs' => ['*'],
+        ],
+
+        /**
+         * You may enable query logging to log all database queries that are executed
+         * by your application. This can help you identify query-related problems,
+         * allowing you to resolve them and making your app run faster.
+         */
+        'query_logging' => [
+            'enabled' => true,
         ],
     ],
 ];

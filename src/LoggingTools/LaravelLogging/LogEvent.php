@@ -2,6 +2,7 @@
 
 namespace Hindsight\LoggingTools\LaravelLogging;
 
+use Hindsight\Support\PropertyExtractor;
 use Illuminate\Log\LogManager;
 
 class LogEvent
@@ -11,23 +12,12 @@ class LogEvent
      */
     private $log;
 
-    /**
-     * LogEvent constructor.
-     * @param LogManager $log
-     */
-    public function __construct(LogManager $log)
-    {
-        $this->log = $log;
-    }
-
     public function handle($event)
     {
-        $this->log->debug('Event dispatched', [
+        logger()->debug('Event dispatched', [
             'class' => get_class($event),
-            'payload' => collect((new \ReflectionClass($event))->getProperties(\ReflectionProperty::IS_PUBLIC))
-                ->flatMap(function (\ReflectionProperty $property) use ($event) {
-                    return [$property->getName() => $property->getValue($event)];
-                }),
+            'payload' => PropertyExtractor::extract($event),
+            'code' => 'hindsight.event-logging.dispatched',
         ]);
     }
 }
